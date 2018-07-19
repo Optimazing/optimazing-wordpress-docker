@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+   db:
+     image: mysql:5.7
+     volumes:
+       - wp_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: Pruebas123
+       MYSQL_DATABASE: wp_optimazing
+       MYSQL_USER: dbOptimazing
+       MYSQL_PASSWORD: Pruebas123
+
+   wordpress:
+     depends_on:
+       - db
+     build:
+       context: .
+       dockerfile: Dockerfile
+     volumes:
+       - ./optimazing/:/var/www/html/wp-content/themes/optimazing
+     ports:
+       - "8080:80"
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_NAME: wp_optimazing
+       WORDPRESS_DB_USER: dbOptimazing
+       WORDPRESS_DB_PASSWORD: Pruebas123
+volumes:
+    wp_data:
