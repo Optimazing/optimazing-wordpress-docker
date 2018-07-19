@@ -14,8 +14,4 @@ COPY wp-su.sh /bin/wp
 RUN chmod +x /bin/wp-cli.phar /bin/wp
 
 # Cleanup
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-#install Wordpress
-#RUN wp core install --url="http://localhost:8080" --title="Optimazing" --admin_user="optimazing" --admin_password="UYagK3wEJwRjk%BmqR" --admin_email="heriberto@cortesbravo.es" --path="/var/www/html"
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
