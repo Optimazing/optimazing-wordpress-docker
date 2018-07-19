@@ -1,2 +1,2 @@
-# Optimazing Wordpress theme
-Repositorio de desarrollo de la nueva plantilla Optimazing
+# Optimazing Wordpress Docker
+Repositorio de Docker para desarrollo en Wordpress
