@@ -17,16 +17,23 @@ services:
        - db
      build:
        context: .
+       args:
+        - WORDPRESS_VERSION=4.9.8
      image: wordpress-optimazing-custom
-     #volumes:
-     #  - ../optimazing-theme:/var/www/html/wp-content/themes/optimazing
+     volumes:
+       - ../optimazing-theme:/var/www/html/wp-content/themes/optimazing
      ports:
-       - "8080:80"
+       - "80:8080"
      restart: always
      environment:
        WORDPRESS_DB_HOST: db:3306
        WORDPRESS_DB_NAME: wp_optimazing
        WORDPRESS_DB_USER: dbOptimazing
        WORDPRESS_DB_PASSWORD: Pruebas123
+       WORDPRESS_URL: http://localhost
+       WORDPRESS_TITLE: Optimazing
+       WORDPRESS_ADMIN_USER: optimazing
+       WORDPRESS_ADMIN_PASS: Pruebas123
+       WORDPRESS_ADMIN_EMAIL: pruebas@example.com
 volumes:
     wp_data:

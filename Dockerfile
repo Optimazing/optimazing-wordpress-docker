@@ -7,6 +7,8 @@
 
 FROM php:fpm
 
+ARG WORDPRESS_VERSION
+
 # Add sudo in order to run wp-cli as the www-data user 
 RUN apt-get update \
  && apt-get install -y libjpeg62-turbo-dev libpng-dev sudo less \
@@ -32,8 +34,6 @@ RUN useradd -d /var/www/html -s /bin/bash wp \
  && chown -R wp .
 USER wp
 
-# WordPress version can be changed at build time using `docker build --build-arg WORDPRESS_VERSION=4.4.2 .`
-ENV WORDPRESS_VERSION 4.9.8
 # TODO: add support for 'latest', Problem: doesn't work with `wp core verify-checksums`
 
 # Download WordPress and verify the checksum
@@ -52,8 +52,16 @@ CMD wp core config \
  # Wait for the database to be ready
     && dockerize -wait tcp://${WORDPRESS_DB_HOST} -timeout 30s \
     && wp core install \
-    --url='http://localhost:8080' \
-    --title='Optimazing' \
-    --admin_user=optimazing \
-    --admin_password=pruebas123 \
-    --admin_email=admin@example.com
+    --url=${WORDPRESS_URL} \
+    --title=${WORDPRESS_TITLE} \
+    --admin_user=${WORDPRESS_ADMIN_USER} \
+    --admin_password=${WORDPRESS_ADMIN_PASS} \
+    --admin_email=${WORDPRESS_ADMIN_EMAIL} \
+    && wp rewrite structure '/%postname%' \
+    && wp plugin delete hello \
+    && wp plugin install https://github.com/Automattic/amp-wp/releases/download/1.0-beta2/amp.zip --activate \
+    && wp plugin install wordpress-seo --activate \
+    && wp plugin install gutenberg --activate \
+    && wp theme activate optimazing \
+    && wp theme delete twentyfifteen twentyseventeen twentysixteen \
+    && wp server --host=0.0.0.0:8080
