@@ -40,6 +40,8 @@ USER wp
 RUN wp core download --version=${WORDPRESS_VERSION} \
  && wp core verify-checksums --version=${WORDPRESS_VERSION}
 
+COPY testdatawp.xml .
+
 EXPOSE 8080
 
  # Configure and install WordPress
@@ -62,6 +64,8 @@ CMD wp core config \
     && wp plugin install https://github.com/Automattic/amp-wp/releases/download/1.0-beta2/amp.zip --activate \
     && wp plugin install wordpress-seo --activate \
     && wp plugin install gutenberg --activate \
+    && wp plugin install wordpress-importer --activate \
+    && wp import testdatawp.xml --authors=skip \
     && wp theme activate optimazing \
     && wp theme delete twentyfifteen twentyseventeen twentysixteen \
     && wp server --host=0.0.0.0:8080
