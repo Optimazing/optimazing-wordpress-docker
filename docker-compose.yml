@@ -18,8 +18,8 @@ services:
      build:
        context: .
      image: wordpress-optimazing-custom
-     volumes:
-       - ../optimazing-theme:/var/www/html/wp-content/themes/optimazing
+     #volumes:
+     #  - ../optimazing-theme:/var/www/html/wp-content/themes/optimazing
      ports:
        - "8080:80"
      restart: always
