@@ -68,4 +68,5 @@ CMD wp core config \
     && wp import testdatawp.xml --authors=skip \
     && wp theme activate optimazing \
     && wp theme delete twentyfifteen twentyseventeen twentysixteen \
+    && wp option update page_on_front 701 \
     && wp server --host=0.0.0.0:8080
