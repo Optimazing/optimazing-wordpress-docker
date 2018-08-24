@@ -4,7 +4,7 @@ services:
    db:
      image: mysql:5.7
      volumes:
-       - wp_data:/var/lib/mysql
+       - wp_db_data:/var/lib/mysql
      restart: always
      environment:
        MYSQL_ROOT_PASSWORD: Pruebas123
@@ -21,6 +21,7 @@ services:
         - WORDPRESS_VERSION=4.9.8
      image: wordpress-optimazing-custom
      volumes:
+       - wp_data:/var/www/html/
        - ../optimazing-theme:/var/www/html/wp-content/themes/optimazing
      ports:
        - "80:8080"
@@ -36,4 +37,5 @@ services:
        WORDPRESS_ADMIN_PASS: Pruebas123
        WORDPRESS_ADMIN_EMAIL: pruebas@example.com
 volumes:
+    wp_db_data:
     wp_data:
