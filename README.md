@@ -2,7 +2,7 @@
 Repositorio de Docker para desarrollo en Wordpress
 
 ##Instrucciones
-Clonar el repositorio del theme [Optimazing] (https://github.com/Optimazing/optimazing-theme)
+Clonar el repositorio del theme [Optimazing](https://github.com/Optimazing/optimazing-theme)
 
 ```
 $ git clone https://github.com/Optimazing/optimazing-theme
